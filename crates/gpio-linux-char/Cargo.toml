@@ -1,0 +1,15 @@
+[package]
+name = "gpio-linux-char"
+description = "GPIO Linux character device driver"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+libc = "0.2.155"
+log = "0.4.21"
+
+[dev-dependencies]
+pretty_assertions = "1.4.0"

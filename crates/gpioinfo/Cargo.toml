@@ -1,0 +1,13 @@
+[package]
+name = "gpioinfo"
+description = "GPIO information utility"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+clap = { version = "4.5.7", features = ["derive"] }
+gpio-linux-char = { path = "../gpio-linux-char" }
