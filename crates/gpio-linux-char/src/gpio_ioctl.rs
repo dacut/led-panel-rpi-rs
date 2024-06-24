@@ -1,5 +1,5 @@
 use {
-    crate::ioctl::{ior, iowr},
+    ioctl_id::{IoctlId, ior, iowr},
     std::{
         io::{Error as IoError, Result as IoResult},
         os::fd::RawFd,
@@ -16,18 +16,18 @@ pub(crate) const GPIO_V2_LINES_MAX: usize = 64;
 pub(crate) const GPIO_V2_LINE_NUM_ATTRS_MAX: usize = 10;
 
 /// IOCTL: Get chip information.
-pub(crate) const GPIO_GET_CHIPINFO_IOCTL: u64 = ior::<RawGpioChipInfo>(0xb4, 0x01) as u64;
+pub(crate) const GPIO_GET_CHIPINFO_IOCTL: IoctlId = ior::<RawGpioChipInfo>(0xb4, 0x01) as u64;
 
 /// IOCTL: ?
 #[allow(dead_code)]
-pub(crate) const GPIO_GET_LINEINFO_UNWATCH_IOCTL: u64 = iowr::<u32>(0xb4, 0x0c) as u64;
+pub(crate) const GPIO_GET_LINEINFO_UNWATCH_IOCTL: IoctlId = iowr::<u32>(0xb4, 0x0c) as u64;
 
 /// IOCTL: Get line information.
-pub(crate) const GPIO_V2_GET_LINEINFO_IOCTL: u64 = iowr::<RawGpioV2LineInfo>(0xb4, 0x05) as u64;
+pub(crate) const GPIO_V2_GET_LINEINFO_IOCTL: IoctlId = iowr::<RawGpioV2LineInfo>(0xb4, 0x05) as u64;
 
 /// IOCTL: ?
 #[allow(dead_code)]
-pub(crate) const GPIO_V2_GET_LINEINFO_WATCH_IOCTL: u64 = iowr::<RawGpioV2LineInfo>(0xb4, 0x06) as u64;
+pub(crate) const GPIO_V2_GET_LINEINFO_WATCH_IOCTL: IoctlId = iowr::<RawGpioV2LineInfo>(0xb4, 0x06) as u64;
 
 /// Line attribute id: flags
 pub(crate) const GPIO_V2_LINE_ATTR_ID_FLAGS: u32 = 1;

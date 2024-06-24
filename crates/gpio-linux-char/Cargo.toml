@@ -10,6 +10,7 @@ version.workspace = true
 [dependencies]
 libc = "0.2.155"
 log = "0.4.21"
+ioctl-id = "0.2.0"
 
 [dev-dependencies]
 pretty_assertions = "1.4.0"

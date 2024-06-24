@@ -20,10 +20,6 @@ use {
 };
 
 pub(crate) mod gpio_ioctl;
-#[allow(dead_code)]
-pub(crate) mod ioctl;
-
-use ioctl::cstr_to_string;
 
 /// Maximum number of lines per chip.
 pub const MAX_GPIO_LINES_PER_CHIP: usize = gpio_ioctl::GPIO_V2_LINES_MAX;
@@ -37,6 +33,16 @@ pub struct Gpio {
 /// Indicates whether a string is composed entirely of ASCII digits.
 fn str_is_ascii_digits(s: &str) -> bool {
     !s.is_empty() && s.chars().all(|c| c.is_ascii_digit())
+}
+
+/// Convert a C string of a maximum size (which might not be NUL-terminated if the size is reached)
+/// info a Rust `String``.
+///
+/// This differs from `std::ffi::CStr::from_bytes_with_nul` in that it does not require the input to
+/// be NUL-terminated.
+pub(crate) fn cstr_to_string(buf: &[u8]) -> String {
+    let len = buf.iter().position(|&b| b == 0).unwrap_or(buf.len());
+    String::from_utf8_lossy(&buf[..len]).to_string()
 }
 
 impl Gpio {
