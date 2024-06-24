@@ -44,7 +44,7 @@ impl Gpio {
     pub fn parse_chip_descriptor(desc: &str) -> IoResult<PathBuf> {
         if desc.is_empty() {
             Err(IoError::new(std::io::ErrorKind::InvalidInput, "Empty GPIO chip descriptor"))
-        } else if desc.starts_with("/") {
+        } else if desc.starts_with('/') {
             Ok(PathBuf::from(desc))
         } else if str_is_ascii_digits(desc) {
             Ok(PathBuf::from(format!("/dev/gpiochip{desc}")))
@@ -76,8 +76,7 @@ impl Gpio {
 
     /// List available GPIO chips.
     ///
-    /// The result is a list of [`PathBuf`][std::path::PathBuf]s representing absolute paths to
-    /// GPIO character devices.
+    /// The result is a list of [`PathBuf`]s representing absolute paths to GPIO character devices.
     ///
     /// # Errors
     /// If the `/dev` directory cannot be read, the underlying [`IoError`][std::io::Error] is returned.
